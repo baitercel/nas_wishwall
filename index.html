@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+ <head> <meta content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable"><meta content="telephone=no" name="format-detection">
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	 <link href="./img/icon.png" rel="shortcut icon" />
+  <title>星云许愿墙</title>
+  <style>
+	*{
+		margin: 0px;
+		padding: 0px;
+	}
+	body{
+		/*background: -webkit-linear-gradient(top, rgb(203, 235, 219) 0%, rgb(55, 148, 192) 120%);*/
+		background: -moz-linear-gradient(top, rgb(203, 235, 219) 0%, rgb(55, 148, 192) 120%);
+		font-family: '微软雅黑', sans-serif;
+		font-size: 16px;
+		position: relative;
+		top: 0px;
+		left: 0px;
+		bottom: 0px;
+		right: 0px;
+	}
+
+	.hide{
+		display: none;
+	}
+
+
+	.item {
+		width: 200px;
+		height: 200px;
+		line-height: 30px;
+		-webkit-border-bottom-left-radius: 20px 500px;
+		-webkit-border-bottom-right-radius: 500px 30px;
+		-webkit-border-top-right-radius: 5px 100px;
+		-moz-border-bottom-left-radius: 20px 500px;
+		-moz-border-bottom-right-radius: 500px 30px;
+		-moz-border-top-right-radius: 5px 100px;
+		box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.2);
+		-webkit-box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.2);
+		-moz-box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.2);
+	}
+	#container p{
+		height: 80px;
+		margin: 30px 10px;
+		overflow: hidden;
+		word-wrap: break-word;
+		line-height: 1.5;
+	}
+	#container span{
+		text-decoration: none;
+		color: white;
+		position: relative;
+		left: 150px;
+		coler: red;
+		font-size: 14px;
+	}
+	/*.input{*/
+		/*border: 0;*/
+		/*border-radius: 5px;*/
+		/*display:block;*/
+		/*height: 30px;*/
+		/*padding: 0 1em;*/
+		/*line-height: 30px;*/
+		/*width: 50px;*/
+		/*margin: 10px auto;*/
+		/*font-size: 20px;*/
+		/*float:left;*/
+		/*margin-left:30px;*/
+		/*margin-bottom:140px;*/
+	/*}*/
+	/*#input{*/
+		/*border: 0;*/
+		/*border-radius: 5px;*/
+		/*display:block;*/
+		/*height: 30px;*/
+		/*padding: 0 1em;*/
+		/*line-height: 30px;*/
+		/*width: 200px;*/
+		/*margin: 10px auto;*/
+		/*font-size: 20px;*/
+		/*float:left;*/
+		/*margin-left:30px;*/
+		/*margin-bottom:140px;*/
+	/*}*/
+	#button{
+		border: 0;
+		border-radius: 5px;
+		display:block;
+		height: 30px;
+		padding: 0 1em;
+		line-height: 30px;
+		width: 70px;
+		margin: 10px auto;
+		margin-left:10px;
+		
+		font-size: 15px;float:left;
+	}
+
+	.footer{
+		position: fixed;
+		bottom: 0;
+		text-align: center;
+		width:100%;
+	}
+  </style> 
+  <script src="jquery.min.js"></script>
+	 <link rel="stylesheet" href="lib/bootstrap-4.0.0-dist/css/bootstrap.min.css">
+	 <link rel="stylesheet" href="http://www.bootcss.com/p/buttons/css/buttons.css">
+ </head> 
+ <body> 
+  <div id="container" style="height:100%;">
+  </div>
+
+
+
+
+  <div style="width:500px;text-align: center;margin: auto;">
+	  <div class="noExtension hide" id="noExtension"  >
+		  注意: 请安装 <a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet" style="color: red;">星云钱包拓展</a>
+	  </div>
+	  <input id="name" class="form-control" type="text" placeholder="署名" style="width:60px;float:left; font-size:12px;height:30px;line-height: 30px;padding: 0 1em;margin: 10px auto;margin-left:30px;" />
+	  <input id="input" type="text" class="form-control" placeholder="许愿内容" style="width:250px;float:left; font-size:12px;height:30px;line-height: 30px;padding: 0 1em;margin: 10px auto;margin-left:15px;" /> 　
+	  <input  name="input" type="button" id="button" value='许愿' class="button button-royal button-pill button-giant">
+
+
+  </div>
+
+
+  <div class="footer">
+	  <p style=" text-align:center;font-size:12px;color:#000">星云许愿墙基于星云链主网运行，永久保存您的许愿。</p>
+	  <p style="text-align:center;font-size:12px;color:#aaa">
+
+		  <a style="color:red" href="https://incentive.nebulas.io/cn/signup.html?invite=grIMv">提交DAPP获得100NAS</a>
+
+
+	  </p>
+
+	  <p style="text-align:center;font-size:12px;color:#aaa">
+		  <a href="https://nebulas.io/">
+
+			  <img style="height:1.5rem;" src="data:image/svg+xml;base64,PHN2ZyBpZD0i5Zu+5bGCXzEiIGRhdGEtbmFtZT0i5Zu+5bGCIDEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDIxNCAzMCI+CiAgPGRlZnM+CiAgICA8c3R5bGU+LmNscy0xe2ZpbGwtcnVsZTpldmVub2RkO308L3N0eWxlPgogIDwvZGVmcz4KICA8dGl0bGU+bmViPC90aXRsZT4KICA8cGF0aCBjbGFzcz0iY2xzLTEiCiAgICAgICAgZD0iTTEwOC45MiwyLjVsLTIuNDEsNy4zMmgwbC05LjIsNC42OCw3LjEsMi40OCw0LjU1LDkuNSwyLjQxLTcuMzJoMGw5LjItNC42OEwxMTMuNDYsMTJabS00LjU0LDEzLjYzLTUtMS43Ni4xMS0uMDYsNi42OS0zLjQtMS43Miw1LjIzWm00LjY4LTExLjUxLDMuNiw3LjUzLTcuMywzLjcxWm0tLjI1LDE5Ljc1LTMuMzUtNyw1LjA3LDEuNzZabTkuNTktOS42OUwxMTEsMTguNDVsLTUuMy0xLjg1LjExLS4wNiw3LjM5LTMuNzYsNS4zLDEuODVaIi8+CiAgPHBhdGggY2xhc3M9ImNscy0xIgogICAgICAgIGQ9Ik0xNTUuNDEsMTQuNTZhMiwyLDAsMCwwLC40My0xLjIzVjEyLjE0YTIuMSwyLjEsMCwwLDAtMS40NS0ybDAsMGE0LjkxLDQuOTEsMCwwLDAtMS41NS0uMjVoLTQuOTF2OS43M2g1LjY0YTQuODIsNC44MiwwLDAsMCwxLjU0LS4yNWwuMDYsMGEyLjEsMi4xLDAsMCwwLDEuNDUtMnYtLjg3QTIuMzQsMi4zNCwwLDAsMCwxNTUuNDEsMTQuNTZabS02LjY4LTMuODRoNC4wN2E0LjA3LDQuMDcsMCwwLDEsMS4yOS4yMWwwLDBhMS4yNywxLjI3LDAsMCwxLC44NywxLjJ2MS4xOWExLjEyLDEuMTIsMCwwLDEtLjYxLDFoLTUuNjZabTUuNzIsNC4zOGExLjUxLDEuNTEsMCwwLDEsMS4yOSwxLjQxdi44NGExLjI2LDEuMjYsMCwwLDEtLjg3LDEuMmwtLjA1LDBhNCw0LDAsMCwxLTEuMjkuMjFoLTQuOFYxNS4wOVoiLz4KICA8cG9seWdvbiBjbGFzcz0iY2xzLTEiCiAgICAgICAgICAgcG9pbnRzPSIxMzYuMDcgMTkuNiAxMzYuMDcgMTAuMDUgMTQzLjg4IDEwLjA1IDE0My44OCAxMC44NSAxMzYuODUgMTAuODUgMTM2Ljg1IDE0LjQzIDE0My4xMSAxNC40MyAxNDMuMTEgMTUuMjIgMTM2Ljg1IDE1LjIyIDEzNi44NSAxOC44IDE0NC42NCAxOC44IDE0NC42NCAxOS42IDEzNi4wNyAxOS42Ii8+CiAgPHBvbHlnb24gY2xhc3M9ImNscy0xIgogICAgICAgICAgIHBvaW50cz0iMTI0LjkxIDExLjQ5IDEyNC45MSAxOS40MiAxMjQuMTMgMTkuNDIgMTI0LjEzIDkuNDggMTMxLjk3IDE3Ljk5IDEzMS45NyAxMC4wNyAxMzIuNzYgMTAuMDcgMTMyLjc2IDIwIDEyNC45MSAxMS40OSIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIKICAgICAgICBkPSJNMTYzLjY3LDE5LjYyYTQsNCwwLDAsMS0zLjk1LTMuODNWOS44N2guODN2NS45MWEzLjEyLDMuMTIsMCwwLDAsMy4xMiwzaC41OWEzLjEyLDMuMTIsMCwwLDAsMy4xMi0zVjkuODdoLjgzdjUuOTFhNCw0LDAsMCwxLTMuOTQsMy44NFoiLz4KICA8cG9seWdvbiBjbGFzcz0iY2xzLTEiCiAgICAgICAgICAgcG9pbnRzPSIxNzEuODIgMTkuNDIgMTcxLjgyIDEwLjA3IDE3Mi42MSAxMC4wNyAxNzIuNjEgMTguNjQgMTc5LjY5IDE4LjY0IDE3OS42OSAxOS40MiAxNzEuODIgMTkuNDIiLz4KICA8cGF0aCBjbGFzcz0iY2xzLTEiCiAgICAgICAgZD0iTTE5MC4yOCwxOS41M2wtMS4xOC0yLjM1aC01LjU3bC0xLjE4LDIuMzVoLS45bDQuODctOS42Nyw0Ljg2LDkuNjdabS0xLjU4LTMuMTUtMi4zOC00Ljc0LTIuMzgsNC43NFoiLz4KICA8cGF0aCBjbGFzcz0iY2xzLTEiCiAgICAgICAgZD0iTTE5My42NCwxOS40MXYtLjgyaDUuNDZhMy44OSwzLjg5LDAsMCwwLDEuMjItLjIsMS40MywxLjQzLDAsMCwwLC44NC0xLjI2VjE2LjZhMS40MiwxLjQyLDAsMCwwLS44Mi0xLjI0LDQsNCwwLDAsMC0xLjI1LS4yaC0zYTQuNzMsNC43MywwLDAsMS0xLjUyLS4yNUEyLDIsMCwwLDEsMTkzLjI0LDEzVjEyLjJhMiwyLDAsMCwxLDEuMzgtMS44OCw0LjY4LDQuNjgsMCwwLDEsMS41MS0uMjVoNC44MnYuODJoLTQuODJhMy45LDMuOSwwLDAsMC0xLjI1LjIxLDEuMTUsMS4xNSwwLDAsMC0uODEsMS4xVjEzYTEuMTUsMS4xNSwwLDAsMCwuODEsMS4xLDQsNCwwLDAsMCwxLjI2LjIxaDNhNC43Miw0LjcyLDAsMCwxLDEuNDguMjRsLjA5LDBhMi4yNCwyLjI0LDAsMCwxLDEuMzIsMnYuNTVhMi4yNSwyLjI1LDAsMCwxLTEuMzEsMmwtLjA4LDBhNC43NCw0Ljc0LDAsMCwxLTEuNDkuMjRaIi8+CiAgPHBhdGgKICAgIGQ9Ik0xNC44MSwxMy4yMmEyLjYxLDIuNjEsMCwwLDAsLjU1LTEuNzEsMi43OCwyLjc4LDAsMCwwLS4yNS0xLjE4LDIuNDEsMi40MSwwLDAsMC0uNjktLjg4LDIuNjcsMi42NywwLDAsMC0xLS41LDExLjYyLDExLjYyLDAsMCwwLTIuMzMtLjE0SDkuMTh2MTAuM0gxMFYxNC4yNGguOGExMy43MiwxMy43MiwwLDAsMCwyLjYxLS4xOEEyLjM5LDIuMzksMCwwLDAsMTQuODEsMTMuMjJabS0uODgtLjM2YTIuNjMsMi42MywwLDAsMS0yLC41NUgxMFY5LjY2aDEuODhjMS43LDAsMi41Ni42MiwyLjU2LDEuODVBMS45MiwxLjkyLDAsMCwxLDEzLjkzLDEyLjg2WiIvPgogIDxwYXRoCiAgICBkPSJNMjMuNTgsMTIuNTJhMy43LDMuNywwLDAsMC01LjQyLDBBNCw0LDAsMCwwLDE3LDE1LjM3YTQsNCwwLDAsMCwxLjExLDIuODIsMy43NCwzLjc0LDAsMCwwLDUuNDUsMCw0LjE5LDQuMTksMCwwLDAsMC01LjY4Wk0yMywxNy42NWEyLjg1LDIuODUsMCwwLDEtMi4xNS45NCwyLjc5LDIuNzksMCwwLDEtMi4xMy0uOTMsMy4yMywzLjIzLDAsMCwxLS44Ni0yLjI2LDMuMywzLjMsMCwwLDEsLjg5LTIuMywyLjgxLDIuODEsMCwwLDEsNC4yNCwwLDMuMjYsMy4yNiwwLDAsMSwuODksMi4yOEEzLjIxLDMuMjEsMCwwLDEsMjMsMTcuNjVaIi8+CiAgPHBvbHlnb24KICAgIHBvaW50cz0iMzYuMjMgMTEuNTQgMzMuODQgMTcuNTUgMzEuMzggMTEuNTQgMzEuMzIgMTEuNTQgMjguODUgMTcuNTUgMjYuNSAxMS41NCAyNS42OCAxMS41NCAyOC44MiAxOS4zNyAyOC44OSAxOS4zNyAzMS4zNSAxMy40MyAzMy44IDE5LjM3IDMzLjg3IDE5LjM3IDM3LjA3IDExLjU0IDM2LjIzIDExLjU0Ii8+CiAgPHBhdGgKICAgIGQ9Ik00NC42OCwxNi44YTMuMTIsMy4xMiwwLDAsMS0yLjg5LDEuODIsMi43MiwyLjcyLDAsMCwxLTItLjg4LDMuMzgsMy4zOCwwLDAsMS0uODgtMi4zMXYtLjA5aDYuNzZhNC4yLDQuMiwwLDAsMC0xLjEzLTIuOTEsMy42NCwzLjY0LDAsMCwwLTIuNjktMS4xLDMuNTEsMy41MSwwLDAsMC0yLjY4LDEuMTgsNC4yNiw0LjI2LDAsMCwwLDAsNS42OCwzLjU3LDMuNTcsMCwwLDAsMi43NCwxLjE4LDMuNzgsMy43OCwwLDAsMCwzLjQ4LTIuMjFaTTM5LDE0LjU1YTIuODMsMi44MywwLDAsMSwyLjg1LTIuNDIsMywzLDAsMCwxLDEuODcuNjQsMi44MywyLjgzLDAsMCwxLDEsMS43OWwwLC4xaC01LjhaIi8+CiAgPHBhdGgKICAgIGQ9Ik01OC4xMywxNi44YTMuMTIsMy4xMiwwLDAsMS0yLjg5LDEuODIsMi43MiwyLjcyLDAsMCwxLTItLjg4LDMuMzgsMy4zOCwwLDAsMS0uODgtMi4zMXYtLjA5aDYuNzZBNC4yLDQuMiwwLDAsMCw1OCwxMi40M2EzLjY0LDMuNjQsMCwwLDAtMi42OS0xLjEsMy41MSwzLjUxLDAsMCwwLTIuNjgsMS4xOCw0LjI2LDQuMjYsMCwwLDAsMCw1LjY4LDMuNTcsMy41NywwLDAsMCwyLjc0LDEuMTgsMy43OCwzLjc4LDAsMCwwLDMuNDgtMi4yMVptLTUuNy0yLjI1YTIuODMsMi44MywwLDAsMSwyLjg1LTIuNDIsMywzLDAsMCwxLDEuODcuNjQsMi44MywyLjgzLDAsMCwxLDEsMS43OWwwLC4xSDUyLjRaIi8+CiAgPHBhdGgKICAgIGQ9Ik02MS44MywxOC4xOGEzLjYxLDMuNjEsMCwwLDAsMi43MywxLjE4LDMuNjgsMy42OCwwLDAsMCwyLjg4LTEuNTZsLjE1LS4xOHYxLjQ4aC43OFY4LjU1aC0uNzh2NC41OGwtLjE1LS4yMWEzLjQ0LDMuNDQsMCwwLDAtMi45Mi0xLjU4LDMuNTksMy41OSwwLDAsMC0yLjY4LDEuMTgsNCw0LDAsMCwwLTEuMTIsMi44M0E0LDQsMCwwLDAsNjEuODMsMTguMThabS41OC01LjFhMywzLDAsMCwxLDQuMzcsMCwzLjI5LDMuMjksMCwwLDEsLjg3LDIuMywzLjE2LDMuMTYsMCwwLDEtLjkzLDIuMzMsMywzLDAsMCwxLTIuMTYuOTIsMi44MiwyLjgyLDAsMCwxLTIuMTMtMSwzLjM3LDMuMzcsMCwwLDEsMC00LjU2WiIvPgogIDxwYXRoCiAgICBkPSJNODAuODksMTIuNTFhMy41NCwzLjU0LDAsMCwwLTIuNjgtMS4xOCwzLjY3LDMuNjcsMCwwLDAtMi45NSwxLjVsLS4xNS4xOFY4LjU1aC0uNzhWMTkuMTFoLjc4VjE3LjVsLjE1LjIxYTMuNSwzLjUsMCwwLDAsMi45MiwxLjY2LDMuNTgsMy41OCwwLDAsMCwyLjY4LTEuMTgsNC4xOCw0LjE4LDAsMCwwLDAtNS42OFptLS42LDUuMWEyLjkyLDIuOTIsMCwwLDEtNC4zNCwwLDMuMzUsMy4zNSwwLDAsMS0uODktMi4zNUEzLjE5LDMuMTksMCwwLDEsNzUuOTQsMTNhMi45MiwyLjkyLDAsMCwxLDIuMTktLjkxLDIuODIsMi44MiwwLDAsMSwyLjE4LDEsMy4zMywzLjMzLDAsMCwxLC44NywyLjI4QTMuMjgsMy4yOCwwLDAsMSw4MC4yOSwxNy42WiIvPgogIDxwb2x5Z29uCiAgICBwb2ludHM9Ijg5LjE5IDExLjU0IDg2LjYzIDE3LjYzIDgzLjk5IDExLjU0IDgzLjE1IDExLjU0IDg2LjIgMTguNjEgODQuNzkgMjEuOTMgODUuNjMgMjEuOTMgOTAuMDQgMTEuNTQgODkuMTkgMTEuNTQiLz4KICA8cmVjdCB4PSI0Ny4zOCIgeT0iMTEuNDkiIHdpZHRoPSIwLjgzIiBoZWlnaHQ9IjcuNzIiLz4KICA8cGF0aAogICAgZD0iTTQ3LjM5LDE0LjA2aC44NGExLjg5LDEuODksMCwwLDEsMS44NS0xLjcyLDEuOCwxLjgsMCwwLDEsLjYyLjEydi0uOWEyLjYzLDIuNjMsMCwwLDAtLjYyLS4wOEEyLjc0LDIuNzQsMCwwLDAsNDcuMzksMTQuMDZaIi8+Cjwvc3ZnPgo=" alt="" />
+
+
+	  		</a>
+
+
+	  </p>
+
+  </div>
+
+
+  <script src=lib/jquery-3.3.1.min.js></script>
+  <script src=lib/nebPay.js></script>
+  <script src=lib/bootstrap-4.0.0-dist/js/bootstrap.min.js></script>
+<script>
+  (function ($) {
+	  var container;
+	  var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
+	  var nebPay = new NebPay();
+
+	  $("#name").attr("disabled",true)
+	  $("#button").attr("disabled",true)
+	  $("#input").attr("disabled",true)
+
+	  if(typeof(webExtensionWallet) === "undefined"){
+		  $("#noExtension").removeClass("hide")
+	  }else{
+		  $("#name").attr("disabled",false)
+		  $("#button").attr("disabled",false)
+		  $("#input").attr("disabled",false)
+	  }
+
+
+	  var dappAddress = "n1sHa8rYy76SFVihPZtTWqq2AiVxbW4LAbe";
+
+
+
+
+
+	
+	// 可选颜色
+	var colors = ['#96C2F1', '#BBE1F1', '#E3E197', '#F8B3D0', '#FFCC00'];
+	
+	//创建许愿页
+	var createItem = function(text){
+		var color = colors[parseInt(Math.random() * 5, 10)]
+		$('<div class="item"><p>'+ text.info +'</p><span href="#">'+ text.name +'</span></div>').css({ 'background': color }).appendTo(container).drag();
+	};
+	
+	// 定义拖拽函数
+    $.fn.drag = function () {
+		
+        var $this = $(this);
+        var parent = $this.parent();
+		
+        var pw = parent.width();
+        var ph = parent.height();
+        var thisWidth = $this.width() + parseInt($this.css('padding-left'), 10) + parseInt($this.css('padding-right'), 10);
+        var thisHeight = $this.height() + parseInt($this.css('padding-top'), 10) + parseInt($this.css('padding-bottom'), 10);
+
+        var x, y, positionX, positionY;
+        var isDown = false; 
+
+        var randY = parseInt(Math.random() * (ph - thisHeight), 10);
+        var randX = parseInt(Math.random() * (pw - thisWidth), 10);
+
+
+        parent.css({
+            "position": "relative",
+            "overflow": "hidden"
+        });
+		
+        $this.css({
+            "cursor": "move",
+            "position": "absolute"
+        }).css({
+            top: randY,
+            left: randX
+        }).mousedown(function (e) {
+            parent.children().css({
+                "zIndex": "0"
+            });
+            $this.css({
+                "zIndex": "1"
+            });
+            isDown = true;
+            x = e.pageX;
+            y = e.pageY;
+            positionX = $this.position().left;
+            positionY = $this.position().top;
+            return false;
+        });
+		
+		
+        $(document).mouseup(function (e) {
+            isDown = false;
+        }).mousemove(function (e) {
+            var xPage = e.pageX;
+            var moveX = positionX + xPage - x;
+
+            var yPage = e.pageY;
+            var moveY = positionY + yPage - y;
+
+            if (isDown == true) {
+                $this.css({
+                    "left": moveX,
+                    "top": moveY
+                });
+            } else {
+                return;
+            }
+            if (moveX < 0) {
+                $this.css({
+                    "left": "0"
+                });
+            }
+            if (moveX > (pw - thisWidth)) {
+                $this.css({
+                    "left": pw - thisWidth
+                });
+            }
+            if (moveY < 0) {
+                $this.css({
+                    "top": "0"
+                });
+            }
+            if (moveY > (ph - thisHeight)) {
+                $this.css({
+                    "top": ph - thisHeight
+                });
+            }
+        });
+    };
+	
+	// 初始化
+	var init = function () {
+		container = $('#container');
+		// 绑定关闭事件
+		container.on('click','a',function () {
+			$(this).parent().remove();
+		}).height($(window).height() -204);
+
+		var to = dappAddress;
+		var value = "0";
+		var callFunction = "forEach";
+		var callArgs = `[]`;
+		nebPay.simulateCall(to, value, callFunction, callArgs, {    //使用nebpay的simulateCall接口去执行get查询, 模拟执行.不发送交易,不上链
+			listener: cbSearch      //指定回调函数
+		});
+
+		function cbSearch(resp) {
+
+			var result = resp.result
+			result = JSON.parse(JSON.parse(result))
+
+
+
+
+			console.log(8888);
+
+			console.log(result);
+			console.log(result.length);
+
+
+
+			console.log(result[0].info);
+			var tests = [];
+
+			for(var x=0;x<result.length;x++){
+				tests.push(result[x])
+			}
+
+			console.log(tests);
+//			tests = ["232323","55555"]
+
+			console.log(9999);
+
+
+			$.each(tests, function (i,v) {
+				createItem(v);
+			});
+
+		}
+
+
+
+
+
+
+		$('#button').click(function (e) {
+			console.log(dappAddress)
+
+			var to = dappAddress;
+			var value = "0";
+			var callFunction = "save";
+			var callArgs = [];
+			callArgs.push($("#name").val())
+			callArgs.push($("#input").val())
+
+
+			nebPay.call(to, value, callFunction, JSON.stringify(callArgs), {    //使用nebpay的call接口去调用合约,
+				listener: cbPush
+			});
+
+		});
+
+
+		function cbPush(resp) {
+			console.log("response of push: " + resp)
+		}
+
+	};
+	
+		 
+	
+	$(function() {
+		init();
+	});
+	
+})(jQuery);
+
+
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ </body>
+</html>
