@@ -326,11 +326,44 @@
 		}
 
 
-
+		function getByteLen(val) {
+			var len = 0;
+			for (var i = 0; i < val.length; i++) {
+				var a = val.charAt(i);
+				if (a.match(/[^\x00-\xff]/ig) != null) {
+					len += 2;
+				}
+				else {
+					len += 1;
+				}
+			}
+			return len;
+		}
 
 
 
 		$('#button').click(function (e) {
+
+
+
+
+			if(getByteLen($("#name").val()) == 0 || getByteLen($("#input").val())==0){
+				alert('名字或内容不能为空')
+				return;
+			}
+
+
+			if(getByteLen($("#name").val()) > 6){
+				alert('姓名太长')
+				return;
+			}
+
+			if(getByteLen($("#input").val()) > 60){
+				alert('内容太长')
+				return;
+			}
+
+
 			console.log(dappAddress)
 
 			var to = dappAddress;
